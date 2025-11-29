@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View, Text } from 'react-native';
 import Svg, { Path, Circle, Defs, LinearGradient, Stop, Line, Text as SvgText } from 'react-native-svg';
 import { Activity } from 'lucide-react-native';
-import { MoodEntry, MOOD_COLORS } from '@/app/types';
+import { MoodEntry, MOOD_COLORS } from '@/types';
 
 interface MoodChartProps {
   entries: MoodEntry[];

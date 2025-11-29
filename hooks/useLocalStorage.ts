@@ -66,8 +66,3 @@ export function useLocalStorage() {
     deleteEntry,
   };
 }
-
-// Route stub so the app router doesn't treat this file as a page route.
-export default function _UseLocalStorageRouteStub() {
-  return null as any;
-}

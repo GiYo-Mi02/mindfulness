@@ -25,8 +25,3 @@ export const MOOD_COLORS: Record<number, string> = {
   4: '#84cc16', // lime-500
   5: '#22c55e', // green-500
 };
-
-// Route stub to avoid app-router treating this folder as a page.
-export default function _TypesRouteStub() {
-  return null as any;
-}

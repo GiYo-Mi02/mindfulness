@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Plus, Wind, BarChart2, BookOpen, PlusCircle } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { useLocalStorage } from '@/app/hooks/useLocalStorage';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import MoodChart from '@/components/MoodChart';
 import MoodEntryCard from '@/components/MoodEntryCard';
 import HistoryFeed from '@/components/HistoryFeed';
@@ -13,6 +14,8 @@ export default function HomeScreen() {
   const router = useRouter();
   const { entries, isLoading, addEntry, deleteEntry } = useLocalStorage();
   const [view, setView] = useState<'dashboard' | 'entry' | 'breathe'>('dashboard');
+  const isDashboard = view === 'dashboard';
+  const isBreathe = view === 'breathe';
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   const handleSaveEntry = useCallback(
@@ -79,7 +82,7 @@ export default function HomeScreen() {
         {/* Header */}
         <View className="px-5 pt-6 pb-2 flex-row justify-between items-center">
           <View>
-            <Text className="text-slate-800 text-2xl font-bold">Hello, Friend</Text>
+            <Text className="text-slate-800 text-2xl font-bold">Hello, Gio Joshua</Text>
             <Text className="text-slate-500 text-sm mt-1">Let's check in on you.</Text>
           </View>
           <TouchableOpacity 
@@ -132,8 +135,8 @@ export default function HomeScreen() {
           onPress={() => setView('dashboard')}
           className="flex-col items-center gap-1"
         >
-          <BarChart2 size={24} color={view === 'dashboard' ? '#6366f1' : '#94a3b8'} strokeWidth={view === 'dashboard' ? 2.5 : 2} />
-          <Text className={`text-[10px] font-medium ${view === 'dashboard' ? 'text-indigo-600' : 'text-slate-400'}`}>Insights</Text>
+          <BarChart2 size={24} color={isDashboard ? '#6366f1' : '#94a3b8'} strokeWidth={isDashboard ? 2.5 : 2} />
+          <Text className={`text-[10px] font-medium ${isDashboard ? 'text-indigo-600' : 'text-slate-400'}`}>Insights</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -147,8 +150,8 @@ export default function HomeScreen() {
           onPress={() => setView('breathe')}
           className="flex-col items-center gap-1"
         >
-          <Wind size={24} color={view === 'breathe' ? '#6366f1' : '#94a3b8'} strokeWidth={view === 'breathe' ? 2.5 : 2} />
-          <Text className={`text-[10px] font-medium ${view === 'breathe' ? 'text-indigo-600' : 'text-slate-400'}`}>Breathe</Text>
+          <Wind size={24} color={isBreathe ? '#6366f1' : '#94a3b8'} strokeWidth={isBreathe ? 2.5 : 2} />
+          <Text className={`text-[10px] font-medium ${isBreathe ? 'text-indigo-600' : 'text-slate-400'}`}>Breathe</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

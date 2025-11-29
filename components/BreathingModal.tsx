@@ -15,6 +15,7 @@ export default function BreathingModal({ visible, onClose }: BreathingModalProps
   const [isActive, setIsActive] = useState(false);
   const [countdown, setCountdown] = useState(4);
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const AnimatedView = Animated.createAnimatedComponent(View);
 
   useEffect(() => {
     if (!visible) {
@@ -42,26 +43,28 @@ export default function BreathingModal({ visible, onClose }: BreathingModalProps
   }, [isActive]);
 
   useEffect(() => {
-    if (!isActive) return;
+  if (!isActive) return;
 
-    const currentPhase = PHASES[phase];
-    
-    if (currentPhase === 'Inhale') {
-      Animated.timing(scaleAnim, {
-        toValue: 1.5,
-        duration: PHASE_DURATION,
-        easing: Easing.inOut(Easing.ease),
-        useNativeDriver: true,
-      }).start();
-    } else if (currentPhase === 'Exhale') {
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: PHASE_DURATION,
-        easing: Easing.inOut(Easing.ease),
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [phase, isActive]);
+  const currentPhase = PHASES[phase];
+
+  // Only animate for Inhale and Exhale phases
+  if (currentPhase === 'Inhale') {
+    Animated.timing(scaleAnim, {
+      toValue: 1.5,
+      duration: PHASE_DURATION,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: true,
+    }).start();
+  } else if (currentPhase === 'Exhale') {
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: PHASE_DURATION,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: true,
+    }).start();
+  }
+  // Hold phases do nothing - the animation naturally stays at its current value
+}, [phase, isActive, scaleAnim]);
 
   const startBreathing = () => {
     setIsActive(true);
@@ -91,7 +94,7 @@ export default function BreathingModal({ visible, onClose }: BreathingModalProps
       <View className="flex-1 items-center justify-center px-6">
         {/* Breathing Circle */}
         <View className="items-center justify-center w-64 h-64 mb-8">
-          <Animated.View
+          <AnimatedView
             style={{
               transform: [{ scale: scaleAnim }],
             }}
@@ -103,7 +106,7 @@ export default function BreathingModal({ visible, onClose }: BreathingModalProps
             <Text className="text-xl font-medium text-indigo-600">
               {isActive ? PHASES[phase] : 'Ready?'}
             </Text>
-          </Animated.View>
+          </AnimatedView>
         </View>
 
         {/* Phase dots */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { X, Frown, Meh, Smile } from 'lucide-react-native';
-import { CONTEXT_TAGS, MOOD_EMOJIS, ContextTag } from '@/app/types';
+import { CONTEXT_TAGS, MOOD_EMOJIS, ContextTag } from '@/types';
 
 interface MoodEntryCardProps {
   onSave: (entry: { mood: number; tags: string[]; notes: string }) => void;

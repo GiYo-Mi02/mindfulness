@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Trash2 } from 'lucide-react-native';
-import { MoodEntry, MOOD_EMOJIS, MOOD_COLORS } from '@/app/types';
+import { MoodEntry, MOOD_EMOJIS, MOOD_COLORS } from '@/types';
 
 interface HistoryFeedProps {
   entries: MoodEntry[];

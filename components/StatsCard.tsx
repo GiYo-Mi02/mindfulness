@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { View, Text } from 'react-native';
 import { TrendingUp, Hash, Calendar } from 'lucide-react-native';
-import { MoodEntry } from '@/app/types';
+import { MoodEntry } from '@/types';
 
 interface StatsCardProps {
   entries: MoodEntry[];
